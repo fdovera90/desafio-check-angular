@@ -1,0 +1,27 @@
+.search-box {
+    display: block;
+    margin: 40px;
+    padding: 10px 20px;
+    max-width: 600px;
+    width: 95%;
+}
+
+.search-results {
+    max-width: 700px;
+    width: 100%;
+    margin: 10px 40px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: lightgray;
+}
+
+p {
+    margin: 10px 0;
+}
+
+.container {
+    text-align: left;
+}

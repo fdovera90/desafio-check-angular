@@ -1,0 +1,64 @@
+<mat-card>
+    <mat-card-content>
+        <div class="header">
+            <h2>Transferir</h2>
+        </div>
+        <div class="reactive-form">
+            <form
+              autocomplete="off"
+              novalidate
+              name="transferForm"
+              [formGroup]="transferForm"
+              (ngSubmit)="submitTransferForm(formTransfer)"
+              #formTransfer="ngForm"
+              >
+
+              <div class="container">
+                <div class="ng-autocomplete">
+                  <ng-autocomplete
+                    #ngAutoCompleteStatic
+                    [data]="destinationAccounts"
+                    formControlName="destinationAccount"
+                    [initialValue]=""
+                    [placeholder]="placeholder"
+                    [searchKeyword]="keyword"
+                    historyIdentifier="destinationAccountsList"
+                    [historyHeading]="historyHeading"
+                    notFoundText="No encontrado"
+                    [itemTemplate]="itemTemplateStatic"
+                    [notFoundTemplate]="notFoundTemplate"
+                  >
+                  </ng-autocomplete>
+        
+                  <ng-template #itemTemplateStatic let-item>
+                    <a [innerHTML]="item.summary"></a>
+                  </ng-template>
+        
+                  <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                  </ng-template>
+                </div>
+
+                <p><b>RUT: </b>{{ transferForm.value.destinationAccount?.rut }}</p>
+                <p><b>Nombre: </b>{{ transferForm.value.destinationAccount?.name }}</p>
+                <p><b>Correo: </b>{{ transferForm.value.destinationAccount?.email }}</p>
+                <p><b>Teléfono: </b>{{ transferForm.value.destinationAccount?.phone }}</p>
+                <p><b>Banco: </b>{{ transferForm.value.destinationAccount?.bank }}</p>
+                <p><b>Tipo de Cuenta: </b>{{ transferForm.value.destinationAccount?.accountType }}</p>
+                <p><b>N° de Cuenta: </b>{{ transferForm.value.destinationAccount?.accountNumber }}</p>
+                
+                <mat-form-field appearance="outline">
+                    <mat-label>Monto (CLP)</mat-label>
+                    <input type="number" formControlName="amount" (keypress)="validate($event)" matInput required />
+                    <mat-error *ngIf="invalidField('amount')">
+                        El campo Monto es obligatorio
+                    </mat-error>
+                </mat-form-field>  
+              </div>
+
+              <button mat-flat-button color="primary" [disabled]="transferForm.invalid">Transferir</button>
+
+            </form>
+          </div>
+    </mat-card-content>
+</mat-card>

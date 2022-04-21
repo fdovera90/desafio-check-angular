@@ -1,0 +1,45 @@
+<mat-card>
+    <mat-card-content>
+        <div class="header">
+            <h2>Historial de Transferencias</h2>
+        </div>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nombre destinatario </th>
+                <td mat-cell *matCellDef="let element"> {{ element.destinationAccount.name }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="rut">
+                <th mat-header-cell *matHeaderCellDef> RUT </th>
+                <td mat-cell *matCellDef="let element"> {{ element.destinationAccount.rut }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="bank">
+                <th mat-header-cell *matHeaderCellDef> Banco </th>
+                <td mat-cell *matCellDef="let element"> {{ element.destinationAccount.bank }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="accountType">
+                <th mat-header-cell *matHeaderCellDef> Tipo Cuenta </th>
+                <td mat-cell *matCellDef="let element"> {{ element.destinationAccount.accountType }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Monto (CLP) </th>
+                <td mat-cell *matCellDef="let element"> {{ element.amount | number }} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                            showFirstLastButtons 
+                            aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>
+  

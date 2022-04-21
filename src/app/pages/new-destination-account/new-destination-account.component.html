@@ -1,0 +1,92 @@
+<mat-card>
+    <mat-card-content>
+        <div class="header">
+            <h2>Nuevo Destinatario</h2>
+        </div>
+        <form (ngSubmit)="saveNewDestinationAccount(formNewDestinationAccount)" name="destinationAccountForm" [formGroup]="destinationAccountForm" #formNewDestinationAccount="ngForm" novalidate>
+            <table class="example-full-width" cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>RUT</mat-label>
+                            <input type="text" formControlName="rut" autocomplete="off" matInput required />
+                            <mat-error *ngIf="this.destinationAccountForm.get('rut')!.errors?.['required']">
+                                El campo RUT es obligatorio
+                            </mat-error>
+                            <mat-error *ngIf="this.destinationAccountForm.get('rut')!.errors?.['rutValid']">
+                                El RUT debe ser válido
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Nombre</mat-label>
+                            <input formControlName="name" autocomplete="off" matInput required />
+                            <mat-error *ngIf="invalidField('name')">
+                                El campo Nombre es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Correo</mat-label>
+                            <input formControlName="email" autocomplete="off" matInput />
+                            <mat-error *ngIf="invalidField('name')">
+                                El formato del Correo no es válido
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Teléfono (9 dígitos)</mat-label>
+                            <input type="number" formControlName="phone" autocomplete="off" matInput />
+                            <mat-error *ngIf="invalidField('phone')">
+                                El campo Teléfono debe tener sólo 9 dígitos
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Banco</mat-label>
+                            <mat-select formControlName="bank" >
+                                <mat-option *ngFor="let bank of banks;" [value]="bank.name">{{ bank.name }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="invalidField('bank')">
+                                El campo Banco es obligatorio
+                            </mat-error>
+                        </mat-form-field> 
+                    </td>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Tipo Cuenta</mat-label>
+                            <mat-select formControlName="accountType" >
+                                <mat-option *ngFor="let accountType of accountTypes" [value]="accountType.name">{{ accountType.name }}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="invalidField('accountType')">
+                                El campo Tipo Cuenta es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>N° de Cuenta</mat-label>
+                            <input type="number" formControlName="accountNumber" autocomplete="off" (keypress)="validate($event)" matInput required />
+                            <mat-error *ngIf="invalidField('accountNumber')">
+                                El campo N° de Cuenta es obligatorio y no debe contener caracteres especiales
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+
+            <button mat-flat-button color="primary" [disabled]="destinationAccountForm.invalid">Crear</button>
+            
+        </form>
+    </mat-card-content>
+</mat-card>
